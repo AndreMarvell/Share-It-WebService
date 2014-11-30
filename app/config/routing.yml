@@ -1,0 +1,4 @@
+covoiturage_user:
+    resource: "@CovoiturageUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
