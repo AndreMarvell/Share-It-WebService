@@ -33,7 +33,7 @@ class Annonce
      *
      * @ORM\Column(name="recurrent", type="boolean")
      */
-    private $recurrent;
+    private $recurrent = false;
     
     /**
      * @ORM\OneToOne(targetEntity="Covoiturage\UserBundle\Entity\Adresse", cascade={"persist"})
@@ -46,6 +46,20 @@ class Annonce
      * @ORM\JoinColumn(name="arrivee_id", referencedColumnName="id", nullable=true)
      */
     private $arrivee;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Covoiturage\UserBundle\Entity\Conducteur", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $conducteur;
+
 
 
     /**
@@ -148,5 +162,51 @@ class Annonce
     public function getArrivee()
     {
         return $this->arrivee;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param float $prix
+     * @return Annonce
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float 
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set conducteur
+     *
+     * @param \Covoiturage\UserBundle\Entity\Conducteur $conducteur
+     * @return Annonce
+     */
+    public function setConducteur(\Covoiturage\UserBundle\Entity\Conducteur $conducteur)
+    {
+        $this->conducteur = $conducteur;
+
+        return $this;
+    }
+
+    /**
+     * Get conducteur
+     *
+     * @return \Covoiturage\UserBundle\Entity\Conducteur 
+     */
+    public function getConducteur()
+    {
+        return $this->conducteur;
     }
 }
