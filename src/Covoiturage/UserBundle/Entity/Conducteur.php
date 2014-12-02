@@ -48,8 +48,17 @@ class Conducteur extends Users
      * @ORM\Column(name="lastTrip", type="datetime", nullable=true)
      */
     private $lastTrip;
-
-
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Covoiturage\UserBundle\Entity\Voiture", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $voitures;
+    
+    function __construct() {
+        $this->voitures = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -150,5 +159,38 @@ class Conducteur extends Users
     public function getLastTrip()
     {
         return $this->lastTrip;
+    }
+    
+    /**
+     * Add voiture
+     *
+     * @param \Covoiturage\UserBundle\Entity\Voiture $voiture
+     * @return Voiture
+     */
+    public function addVoiture(\Covoiturage\UserBundle\Entity\Voiture $voiture)
+    {
+        $this->voitures[] = $voiture;
+
+        return $this;
+    }
+
+    /**
+     * Remove voiture
+     *
+     * @param \Covoiturage\UserBundle\Entity\Voiture $voiture
+     */
+    public function removeVoiture(\Covoiturage\UserBundle\Entity\Voiture $voiture)
+    {
+        $this->voitures->removeElement($voiture);
+    }
+
+    /**
+     * Get voitures
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVoitures()
+    {
+        return $this->voitures;
     }
 }

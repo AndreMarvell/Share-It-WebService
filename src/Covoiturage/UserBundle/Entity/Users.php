@@ -43,25 +43,10 @@ class Users
     private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="Covoiturage\UserBundle\Entity\Adresse", cascade={"persist"})
+     * @ORM\JoinColumn(name="adresse_id", referencedColumnName="id", nullable=true)
      */
     private $adresse;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="code_postal", type="integer", nullable=true)
-     */
-    private $codePostal;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
-     */
-    private $ville;
 
     /**
      * @var string
@@ -215,75 +200,6 @@ class Users
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * Set adresse
-     *
-     * @param string $adresse
-     * @return Users
-     */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    /**
-     * Get adresse
-     *
-     * @return string 
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    /**
-     * Set codePostal
-     *
-     * @param integer $codePostal
-     * @return Users
-     */
-    public function setCodePostal($codePostal)
-    {
-        $this->codePostal = $codePostal;
-
-        return $this;
-    }
-
-    /**
-     * Get codePostal
-     *
-     * @return integer 
-     */
-    public function getCodePostal()
-    {
-        return $this->codePostal;
-    }
-
-    /**
-     * Set ville
-     *
-     * @param string $ville
-     * @return Users
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    /**
-     * Get ville
-     *
-     * @return string 
-     */
-    public function getVille()
-    {
-        return $this->ville;
     }
 
     /**
@@ -514,5 +430,28 @@ class Users
     public function getBirthday()
     {
         return $this->birthday;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param \Covoiturage\UserBundle\Entity\Adresse $adresse
+     * @return Users
+     */
+    public function setAdresse(\Covoiturage\UserBundle\Entity\Adresse $adresse = null)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return \Covoiturage\UserBundle\Entity\Adresse 
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
     }
 }

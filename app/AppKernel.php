@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Covoiturage\UserBundle\CovoiturageUserBundle(),
             new Covoiturage\RateCommentBundle\CovoiturageRateCommentBundle(),
+            new Covoiturage\TransactionBundle\CovoiturageTransactionBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
