@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Conducteur extends Users
+class Conducteur
 {
     /**
      * @var integer
@@ -41,6 +41,11 @@ class Conducteur extends Users
      * @ORM\Column(name="rating", type="integer")
      */
     private $rating = 0;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Covoiturage\UserBundle\Entity\Users", cascade={"persist"})
+     */
+    private $user;
 
     /**
      * @var \DateTime
@@ -54,6 +59,13 @@ class Conducteur extends Users
      * @ORM\JoinColumn(nullable=true)
      */
     private $voitures;
+    
+    /** 
+     *
+     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\RateThread")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $rate;
     
     function __construct() {
         $this->voitures = new \Doctrine\Common\Collections\ArrayCollection();
@@ -192,5 +204,51 @@ class Conducteur extends Users
     public function getVoitures()
     {
         return $this->voitures;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Covoiturage\UserBundle\Entity\Users $user
+     * @return Conducteur
+     */
+    public function setUser(\Covoiturage\UserBundle\Entity\Users $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Covoiturage\UserBundle\Entity\Users 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set rate
+     *
+     * @param \Covoiturage\RateCommentBundle\Entity\RateThread $rate
+     * @return Conducteur
+     */
+    public function setRate(\Covoiturage\RateCommentBundle\Entity\RateThread $rate = null)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return \Covoiturage\RateCommentBundle\Entity\RateThread 
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 }

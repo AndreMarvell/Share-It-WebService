@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Passager extends Users
+class Passager
 {
     /**
      * @var integer
@@ -34,6 +34,18 @@ class Passager extends Users
      * @ORM\Column(name="lastTrip", type="datetime", nullable=true)
      */
     private $lastTrip;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Covoiturage\UserBundle\Entity\Users", cascade={"persist"})
+     */
+    private $user;
+    
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\RateThread")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $rate;
 
 
     /**
@@ -90,5 +102,51 @@ class Passager extends Users
     public function getLastTrip()
     {
         return $this->lastTrip;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Covoiturage\UserBundle\Entity\Users $user
+     * @return Passager
+     */
+    public function setUser(\Covoiturage\UserBundle\Entity\Users $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Covoiturage\UserBundle\Entity\Users 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set rate
+     *
+     * @param \Covoiturage\RateCommentBundle\Entity\RateThread $rate
+     * @return Passager
+     */
+    public function setRate(\Covoiturage\RateCommentBundle\Entity\RateThread $rate = null)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return \Covoiturage\RateCommentBundle\Entity\RateThread 
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 }

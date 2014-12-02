@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Users
- *
  * @ORM\Table()
  * @ORM\Entity
  */
@@ -117,6 +116,9 @@ class Users
      * @ORM\Column(name="birthday", type="datetime", nullable=true)
      */
     private $birthday;
+    
+
+    
     
     function __construct() {
         $this->dateInscription = new \DateTime();
@@ -453,5 +455,28 @@ class Users
     public function getAdresse()
     {
         return $this->adresse;
+    }
+
+    /**
+     * Set rate
+     *
+     * @param \Covoiturage\RateCommentBundle\Entity\RateThread $rate
+     * @return Users
+     */
+    public function setRate(\Covoiturage\RateCommentBundle\Entity\RateThread $rate = null)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return \Covoiturage\RateCommentBundle\Entity\RateThread 
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 }
