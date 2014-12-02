@@ -26,12 +26,21 @@ class Rate
      */
     protected $thread;
     
+    
+    
     /**
      *
      * @ORM\ManyToOne(targetEntity="Covoiturage\UserBundle\Entity\Users")
      * @var Users
      */
     protected $rater;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rate", type="integer")
+     */
+    private $rate;
     
     
     /**
@@ -113,5 +122,28 @@ class Rate
     public function getRater()
     {
         return $this->rater;
+    }
+
+    /**
+     * Set rate
+     *
+     * @param integer $rate
+     * @return Rate
+     */
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return integer 
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 }

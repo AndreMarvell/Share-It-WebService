@@ -35,12 +35,6 @@ class Conducteur
      */
     private $licenseObtainedAt;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="rating", type="integer")
-     */
-    private $rating = 0;
     
     /**
      * @ORM\OneToOne(targetEntity="Covoiturage\UserBundle\Entity\Users", cascade={"persist"})

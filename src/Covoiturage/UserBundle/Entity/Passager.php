@@ -22,13 +22,6 @@ class Passager
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="rating", type="integer")
-     */
-    private $rating = 0;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="lastTrip", type="datetime", nullable=true)
@@ -43,7 +36,6 @@ class Passager
     /**
      *
      * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\RateThread")
-     * @ORM\JoinColumn(nullable=true)
      */
     private $rate;
 

@@ -62,6 +62,13 @@ class Voiture
      * @ORM\Column(name="image_3", type="string", length=255, nullable=true)
      */
     private $image3;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="place", type="integer", length=255, nullable=true)
+     */
+    private $nb_place;
 
 
     /**
