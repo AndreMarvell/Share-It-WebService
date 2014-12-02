@@ -1,0 +1,4 @@
+services:
+#    covoiturage_rate_comment.example:
+#        class: Covoiturage\RateCommentBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

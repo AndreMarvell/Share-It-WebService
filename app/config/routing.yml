@@ -1,3 +1,7 @@
+covoiturage_rate_comment:
+    resource: "@CovoiturageRateCommentBundle/Resources/config/routing.yml"
+    prefix:   /
+
 covoiturage_user:
     resource: "@CovoiturageUserBundle/Resources/config/routing.yml"
     prefix:   /
