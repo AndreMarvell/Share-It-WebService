@@ -1,0 +1,4 @@
+Rest_User : 
+  type : rest
+  resource: "@CovoiturageUserBundle/Resources/config/routing.yml"
+

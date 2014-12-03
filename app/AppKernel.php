@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new Covoiturage\UserBundle\CovoiturageUserBundle(),
             new Covoiturage\RateCommentBundle\CovoiturageRateCommentBundle(),
             new Covoiturage\TransactionBundle\CovoiturageTransactionBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

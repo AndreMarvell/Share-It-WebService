@@ -4,10 +4,16 @@ namespace Covoiturage\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
+
 /**
  * Users
  * @ORM\Table()
  * @ORM\Entity
+ * @ExclusionPolicy("all") 
  */
 class Users
 {
@@ -17,6 +23,7 @@ class Users
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -24,6 +31,7 @@ class Users
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $nom;
 
@@ -31,6 +39,7 @@ class Users
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $prenom;
 
@@ -44,6 +53,7 @@ class Users
     /**
      * @ORM\OneToOne(targetEntity="Covoiturage\UserBundle\Entity\Adresse", cascade={"persist"})
      * @ORM\JoinColumn(name="adresse_id", referencedColumnName="id", nullable=true)
+     * @Expose
      */
     private $adresse;
 
@@ -51,6 +61,7 @@ class Users
      * @var string
      *
      * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $facebookId;
 
@@ -58,6 +69,7 @@ class Users
      * @var string
      *
      * @ORM\Column(name="token", type="string", length=255)
+     * @Expose
      */
     private $token;
 
@@ -65,6 +77,7 @@ class Users
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $username;
 
@@ -72,6 +85,7 @@ class Users
      * @var integer
      *
      * @ORM\Column(name="role", type="integer")
+     * @Expose
      */
     private $role = 1;
 
@@ -79,6 +93,7 @@ class Users
      * @var boolean
      *
      * @ORM\Column(name="locked", type="boolean")
+     * @Expose
      */
     private $locked = false;
 
@@ -86,6 +101,7 @@ class Users
      * @var \DateTime
      *
      * @ORM\Column(name="date_inscription", type="datetime")
+     * @Expose
      */
     private $dateInscription;
 
@@ -93,6 +109,7 @@ class Users
      * @var string
      *
      * @ORM\Column(name="photo", type="string", length=255)
+     * @Expose
      */
     private $photo = "unknow.jpg";
 
@@ -107,6 +124,7 @@ class Users
      * @var \DateTime
      *
      * @ORM\Column(name="lockedAt", type="datetime", nullable=true)
+     * @Expose
      */
     private $lockedAt;
 
@@ -114,6 +132,7 @@ class Users
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="datetime", nullable=true)
+     * @Expose
      */
     private $birthday;
     
@@ -121,6 +140,7 @@ class Users
      * @var float
      *
      * @ORM\Column(name="credits", type="float")
+     * @Expose
      */
     private $credits = 0;
     
