@@ -120,7 +120,7 @@ class Users
     /**
      * @var float
      *
-     * @ORM\Column(name="credits")
+     * @ORM\Column(name="credits", type="float")
      */
     private $credits = 0;
     
