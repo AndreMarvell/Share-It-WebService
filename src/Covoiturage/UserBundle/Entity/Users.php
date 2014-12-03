@@ -117,6 +117,13 @@ class Users
      */
     private $birthday;
     
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="credits")
+     */
+    private $credits = 0;
+    
 
     
     
@@ -478,5 +485,28 @@ class Users
     public function getRate()
     {
         return $this->rate;
+    }
+
+    /**
+     * Set credits
+     *
+     * @param string $credits
+     * @return Users
+     */
+    public function setCredits($credits)
+    {
+        $this->credits = $credits;
+
+        return $this;
+    }
+
+    /**
+     * Get credits
+     *
+     * @return string 
+     */
+    public function getCredits()
+    {
+        return $this->credits;
     }
 }
