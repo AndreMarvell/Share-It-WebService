@@ -1,4 +1,8 @@
 Rest_User : 
   type : rest
   resource: "@CovoiturageUserBundle/Resources/config/routing.yml"
+  
+Rest_Transaction : 
+  type : rest
+  resource: "@CovoiturageTransactionBundle/Resources/config/routing.yml"
 
