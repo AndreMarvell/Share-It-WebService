@@ -46,6 +46,20 @@ class Voyage
      * @ORM\OneToOne(targetEntity="Covoiturage\TransactionBundle\Entity\Demande", cascade={"persist"})
      */
     private $demande;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="conducteur_valide", type="boolean")
+     */
+    private $conducteurValide = false;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="passager_valide", type="boolean")
+     */
+    private $passagerValide = false;
 
 
     /**
@@ -148,5 +162,51 @@ class Voyage
     public function getDemande()
     {
         return $this->demande;
+    }
+
+    /**
+     * Set conducteurValide
+     *
+     * @param boolean $conducteurValide
+     * @return Voyage
+     */
+    public function setConducteurValide($conducteurValide)
+    {
+        $this->conducteurValide = $conducteurValide;
+
+        return $this;
+    }
+
+    /**
+     * Get conducteurValide
+     *
+     * @return boolean 
+     */
+    public function getConducteurValide()
+    {
+        return $this->conducteurValide;
+    }
+
+    /**
+     * Set passagerValide
+     *
+     * @param boolean $passagerValide
+     * @return Voyage
+     */
+    public function setPassagerValide($passagerValide)
+    {
+        $this->passagerValide = $passagerValide;
+
+        return $this;
+    }
+
+    /**
+     * Get passagerValide
+     *
+     * @return boolean 
+     */
+    public function getPassagerValide()
+    {
+        return $this->passagerValide;
     }
 }
