@@ -1,3 +1,4 @@
-covoiturage_transaction_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: CovoiturageTransactionBundle:Default:index }
+users : 
+  type: rest
+  resource:     "CovoiturageTransactionBundle:User"
+  name_prefix:  api_

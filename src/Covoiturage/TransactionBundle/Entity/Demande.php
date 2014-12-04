@@ -61,6 +61,12 @@ class Demande
      * @ORM\JoinColumn(nullable=true)
      */
     private $comments;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Covoiturage\UserBundle\Entity\Adresse", cascade={"persist"})
+     * @ORM\JoinColumn(name="arrivee_id", referencedColumnName="id", nullable=true)
+     */
+    private $arrivee_propose;
 
 
     /**
@@ -209,5 +215,28 @@ class Demande
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set arrivee_propose
+     *
+     * @param \Covoiturage\UserBundle\Entity\Adresse $arriveePropose
+     * @return Demande
+     */
+    public function setArriveePropose(\Covoiturage\UserBundle\Entity\Adresse $arriveePropose = null)
+    {
+        $this->arrivee_propose = $arriveePropose;
+
+        return $this;
+    }
+
+    /**
+     * Get arrivee_propose
+     *
+     * @return \Covoiturage\UserBundle\Entity\Adresse 
+     */
+    public function getArriveePropose()
+    {
+        return $this->arrivee_propose;
     }
 }
