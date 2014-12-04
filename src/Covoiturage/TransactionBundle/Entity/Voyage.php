@@ -4,11 +4,17 @@ namespace Covoiturage\TransactionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
+
 /**
  * Voyage
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ExclusionPolicy("all") 
  */
 class Voyage
 {
@@ -18,6 +24,7 @@ class Voyage
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -39,11 +46,13 @@ class Voyage
      * @var float
      *
      * @ORM\Column(name="prix_final", type="float")
+     * @Expose
      */
     private $prixFinal;
     
     /**
      * @ORM\OneToOne(targetEntity="Covoiturage\TransactionBundle\Entity\Demande", cascade={"persist"})
+     * @Expose
      */
     private $demande;
     
@@ -51,6 +60,7 @@ class Voyage
      * @var boolean
      *
      * @ORM\Column(name="conducteur_valide", type="boolean")
+     * @Expose
      */
     private $conducteurValide = false;
     
@@ -58,6 +68,7 @@ class Voyage
      * @var boolean
      *
      * @ORM\Column(name="passager_valide", type="boolean")
+     * @Expose
      */
     private $passagerValide = false;
 
