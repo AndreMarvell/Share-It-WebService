@@ -116,9 +116,16 @@ class Users
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
      */
     private $password;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
+     */
+    private $salt;
 
     /**
      * @var \DateTime
@@ -528,5 +535,28 @@ class Users
     public function getCredits()
     {
         return $this->credits;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return Users
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 }

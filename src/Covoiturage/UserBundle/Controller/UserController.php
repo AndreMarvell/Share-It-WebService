@@ -5,10 +5,18 @@ namespace Covoiturage\UserBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Util\Codes;
+use FOS\RestBundle\View\RedirectView;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+
+use Covoiturage\UserBundle\Entity\Users;
+use Covoiturage\UserBundle\Form\UsersInscriptionFBType;
+use Covoiturage\UserBundle\Form\UsersInscriptionType;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-class UserController extends Controller
+class UserController extends \FOS\RestBundle\Controller\FOSRestController
 {
     /**
      *
@@ -33,8 +41,163 @@ class UserController extends Controller
 
       if(!is_object($user)){
         throw $this->createNotFoundException();
+      }else{
+        $token = $this->generateToken();
+        $user->setToken($token);
       }
+      
 
       return $user;
+    }
+    
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Inscription d'un utilisateur par facebook",
+     *  input="Covoiturage\UserBundle\Form\UsersInscriptionFBType",
+     *  output="Covoiturage\UserBundle\Entity\Users",
+     * )
+     */
+    public function postUserFacebookAction(Request $request)
+    {
+        $entity = new Users();
+
+//        $token = $this->generateToken();
+//        $entity->setToken($token);
+
+        $form = $this->createForm(new UsersInscriptionFBType(), $entity);
+        $form->bind($request);
+        
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $user =   $em->getRepository('CovoiturageUserBundle:Users')->findOneByFacebookId($entity->getFacebookId());
+
+            if(is_object($user)){
+                return $user;
+            }else{
+
+                $user =   $em->getRepository('CovoiturageUserBundle:Users')->findOneByEmail($entity->getEmail());
+
+                if(is_object($user)){
+                   return $user; 
+                }else{
+                    $em->persist($entity);
+                    $em->flush();
+
+                    return $this->redirectView(
+                        $this->generateUrl(
+                            'api_get_user',
+                            array('id' => $entity->getId())
+                            ),
+                        Codes::HTTP_FOUND
+                        );
+                }
+            }
+        }
+        return array(
+            'form' => $form,
+        );
+    }
+    
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Inscription d'un utilisateur",
+     *  input="Covoiturage\UserBundle\Form\UsersInscriptionType",
+     *  output="Covoiturage\UserBundle\Entity\Users",
+     * )
+     */
+    public function postUserInscriptionAction(Request $request)
+    {
+        $entity = new Users();
+
+//        $token = $this->generateToken();
+//        $entity->setToken($token);
+
+        $form = $this->createForm(new UsersInscriptionType(), $entity);
+        $form->bind($request);
+        
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $user =   $em->getRepository('CovoiturageUserBundle:Users')->findOneByEmail($entity->getEmail());
+
+            if(is_object($user)){
+                throw $this->createNotFoundException("Ce mail est déjà utilisé!");
+            }else{
+                $entity->setSalt(md5(time()));
+                $encoder = new MessageDigestPasswordEncoder('sha1');
+                $password = $encoder->encodePassword($form->get('password')->getData(), $entity->getSalt());
+                
+                $entity->setPassword($password);
+                
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirectView(
+                    $this->generateUrl(
+                        'api_get_user',
+                        array('id' => $entity->getId())
+                        ),
+                    Codes::HTTP_FOUND
+                    );
+            }
+        }
+        return array(
+            'form' => $form,
+        );
+    }
+    
+        /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Connexion d'un utilisateur",
+     *  input="Covoiturage\UserBundle\Form\UsersInscriptionType",
+     *  output="Covoiturage\UserBundle\Entity\Users",
+     * )
+     */
+    public function postUserConnexionAction(Request $request)
+    {
+        $entity = new Users();
+
+        
+
+        $form = $this->createForm(new UsersInscriptionType(), $entity);
+        $form->bind($request);
+        
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $user =   $em->getRepository('CovoiturageUserBundle:Users')->findOneByEmail($entity->getEmail());
+
+            $encoder = new MessageDigestPasswordEncoder('sha1');
+            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
+                
+            if(is_object($user) && $password==$user->getPassword()){
+                
+                // On genere le token
+                $token = $this->generateToken();
+                $user->setToken($token);
+                // On enregistre le token
+                $em->persist($user);
+                $em->flush();
+                // On renvoi l'objet User
+                return $user;
+            }else{
+                throw $this->createNotFoundException("Désolé la tentative de connexion a échoué");
+            }
+        }
+        return array(
+            'form' => $form,
+        );
+    }
+    
+    public function generateToken() {
+//        $csrf = $this->get('form.csrf_provider'); 
+//        $token = $csrf->generateCsrfToken('unknow');
+        $token = md5(uniqid(mt_rand(), true));
+        return $token;
     }
 }
