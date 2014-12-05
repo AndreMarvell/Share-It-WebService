@@ -4,17 +4,13 @@ namespace Covoiturage\TransactionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\VirtualProperty;
+
 
 /**
  * Voyage
  *
  * @ORM\Table()
  * @ORM\Entity
- * @ExclusionPolicy("all") 
  */
 class Voyage
 {
@@ -24,53 +20,51 @@ class Voyage
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Expose
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code_passager", type="string", length=255)
-     */
-    private $codePassager;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code_conducteur", type="string", length=255)
-     */
-    private $codeConducteur;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prix_final", type="float")
-     * @Expose
-     */
-    private $prixFinal;
     
     /**
-     * @ORM\OneToOne(targetEntity="Covoiturage\TransactionBundle\Entity\Demande", cascade={"persist"})
-     * @Expose
+     * @ORM\OneToOne(targetEntity="Covoiturage\TransactionBundle\Entity\Annonce", cascade={"persist"})
+     * 
      */
-    private $demande;
+    private $annonce;
     
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="conducteur_valide", type="boolean")
-     * @Expose
+     * @ORM\ManyToMany(targetEntity="Covoiturage\UserBundle\Entity\Voyageur", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $conducteurValide = false;
+    private $voyageurs;
+    
+    function __construct() {
+        $this->voyageurs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     
     /**
-     * @var boolean
+     * Add voyageur
      *
-     * @ORM\Column(name="passager_valide", type="boolean")
-     * @Expose
+     * @param \Covoiturage\UserBundle\Entity\Voyageur $voyageur
+     * @return Voyageur
      */
-    private $passagerValide = false;
+    public function addVoyageur(\Covoiturage\UserBundle\Entity\Voyageur $voyageur)
+    {
+        $this->voyageurs[] = $voyageur;
+
+        return $this;
+    }
+
+    /**
+     * Remove voyageur
+     *
+     * @param \Covoiturage\UserBundle\Entity\Voyageur $voyageur
+     */
+    public function removeVoyageur(\Covoiturage\UserBundle\Entity\Voyageur $voyageur)
+    {
+        $this->voyageurs->removeElement($voyageur);
+    }
+    
+
+
+
 
 
     /**
@@ -84,140 +78,35 @@ class Voyage
     }
 
     /**
-     * Set codePassager
+     * Set annonce
      *
-     * @param string $codePassager
+     * @param \Covoiturage\TransactionBundle\Entity\Annonce $annonce
      * @return Voyage
      */
-    public function setCodePassager($codePassager)
+    public function setAnnonce(\Covoiturage\TransactionBundle\Entity\Annonce $annonce = null)
     {
-        $this->codePassager = $codePassager;
+        $this->annonce = $annonce;
 
         return $this;
     }
 
     /**
-     * Get codePassager
+     * Get annonce
      *
-     * @return string 
+     * @return \Covoiturage\TransactionBundle\Entity\Annonce 
      */
-    public function getCodePassager()
+    public function getAnnonce()
     {
-        return $this->codePassager;
+        return $this->annonce;
     }
 
     /**
-     * Set codeConducteur
+     * Get voyageurs
      *
-     * @param string $codeConducteur
-     * @return Voyage
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setCodeConducteur($codeConducteur)
+    public function getVoyageurs()
     {
-        $this->codeConducteur = $codeConducteur;
-
-        return $this;
-    }
-
-    /**
-     * Get codeConducteur
-     *
-     * @return string 
-     */
-    public function getCodeConducteur()
-    {
-        return $this->codeConducteur;
-    }
-
-    /**
-     * Set prixFinal
-     *
-     * @param float $prixFinal
-     * @return Voyage
-     */
-    public function setPrixFinal($prixFinal)
-    {
-        $this->prixFinal = $prixFinal;
-
-        return $this;
-    }
-
-    /**
-     * Get prixFinal
-     *
-     * @return float 
-     */
-    public function getPrixFinal()
-    {
-        return $this->prixFinal;
-    }
-
-    /**
-     * Set demande
-     *
-     * @param \Covoiturage\TransactionBundle\Entity\Demande $demande
-     * @return Voyage
-     */
-    public function setDemande(\Covoiturage\TransactionBundle\Entity\Demande $demande = null)
-    {
-        $this->demande = $demande;
-
-        return $this;
-    }
-
-    /**
-     * Get demande
-     *
-     * @return \Covoiturage\TransactionBundle\Entity\Demande 
-     */
-    public function getDemande()
-    {
-        return $this->demande;
-    }
-
-    /**
-     * Set conducteurValide
-     *
-     * @param boolean $conducteurValide
-     * @return Voyage
-     */
-    public function setConducteurValide($conducteurValide)
-    {
-        $this->conducteurValide = $conducteurValide;
-
-        return $this;
-    }
-
-    /**
-     * Get conducteurValide
-     *
-     * @return boolean 
-     */
-    public function getConducteurValide()
-    {
-        return $this->conducteurValide;
-    }
-
-    /**
-     * Set passagerValide
-     *
-     * @param boolean $passagerValide
-     * @return Voyage
-     */
-    public function setPassagerValide($passagerValide)
-    {
-        $this->passagerValide = $passagerValide;
-
-        return $this;
-    }
-
-    /**
-     * Get passagerValide
-     *
-     * @return boolean 
-     */
-    public function getPassagerValide()
-    {
-        return $this->passagerValide;
+        return $this->voyageurs;
     }
 }
