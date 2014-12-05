@@ -2,3 +2,9 @@ voyage :
   type: rest
   resource:     "CovoiturageTransactionBundle:Voyage"
   name_prefix:  api_
+
+
+annonces : 
+  type: rest
+  resource:     "CovoiturageTransactionBundle:Annonces"
+  name_prefix:  api_
