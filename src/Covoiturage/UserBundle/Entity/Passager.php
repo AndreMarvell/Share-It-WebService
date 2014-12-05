@@ -38,6 +38,13 @@ class Passager
      * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\RateThread")
      */
     private $rate;
+    
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\CommentThread")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $comments;
 
 
     /**
@@ -140,5 +147,28 @@ class Passager
     public function getRate()
     {
         return $this->rate;
+    }
+
+    /**
+     * Set comments
+     *
+     * @param \Covoiturage\RateCommentBundle\Entity\CommentThread $comments
+     * @return Passager
+     */
+    public function setComments(\Covoiturage\RateCommentBundle\Entity\CommentThread $comments = null)
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Covoiturage\RateCommentBundle\Entity\CommentThread 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
