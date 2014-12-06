@@ -27,6 +27,13 @@ class Adresse
      * @ORM\Column(name="adresse", type="string", length=255)
      */
     private $adresse;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse_complete", type="string", length=255)
+     */
+    private $adresseComplete;
 
     /**
      * @var integer
@@ -164,5 +171,74 @@ class Adresse
     public function getPays()
     {
         return $this->pays;
+    }
+
+    /**
+     * Set adresseComplete
+     *
+     * @param string $adresseComplete
+     * @return Adresse
+     */
+    public function setAdresseComplete($adresseComplete)
+    {
+        $this->adresseComplete = $adresseComplete;
+
+        return $this;
+    }
+
+    /**
+     * Get adresseComplete
+     *
+     * @return string 
+     */
+    public function getAdresseComplete()
+    {
+        return $this->adresseComplete;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     * @return Adresse
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     * @return Adresse
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
     }
 }
