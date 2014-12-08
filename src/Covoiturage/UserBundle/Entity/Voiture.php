@@ -36,32 +36,18 @@ class Voiture
     private $modele;
 
     /**
-     * @var \DateTime
+     * @var \integer
      *
-     * @ORM\Column(name="annee", type="datetime", nullable=true)
+     * @ORM\Column(name="annee", type="integer", nullable=true)
      */
     private $annee;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image_1", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255)
      */
-    private $image1 = "unknow_car.jpg";
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image_2", type="string", length=255, nullable=true)
-     */
-    private $image2;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image_3", type="string", length=255, nullable=true)
-     */
-    private $image3;
+    private $image = "unknow_car.jpg";
     
     /**
      * @var string
@@ -217,5 +203,51 @@ class Voiture
     public function getImage3()
     {
         return $this->image3;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Voiture
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set nb_place
+     *
+     * @param integer $nbPlace
+     * @return Voiture
+     */
+    public function setNbPlace($nbPlace)
+    {
+        $this->nb_place = $nbPlace;
+
+        return $this;
+    }
+
+    /**
+     * Get nb_place
+     *
+     * @return integer 
+     */
+    public function getNbPlace()
+    {
+        return $this->nb_place;
     }
 }

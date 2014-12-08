@@ -1,13 +1,14 @@
 <?php
 
-namespace Covoiturage\UserBundle\Form;
+namespace Covoiturage\RateCommentBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Covoiturage\UserBundle\Form\DataTransformer\AdresseTransformer;
+use Covoiturage\UserBundle\Form\DataTransformer\UsersTransformer;
+use Covoiturage\RateCommentBundle\Form\DataTransformer\CommentThreadTransformer;
 
-class UsersType extends AbstractType
+class CommentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,19 +16,18 @@ class UsersType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
-        $adresseTransformer = new AdresseTransformer($options['geocoding'],$options['em']);
+        $userTransformer = new UsersTransformer($options['em']);
+        $threadTransformer = new RateThreadTransformer($options['em']);
         
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('email')
-            ->add('username')
-            ->add('photo')
-            ->add('birthday')
+            ->add('comment')
             ->add(
-                    $builder->create('adresse','text')
-                            ->addModelTransformer($adresseTransformer)
+                    $builder->create('thread','text')
+                            ->addModelTransformer($threadTransformer)
+                 )
+            ->add(
+                    $builder->create('commenter','text')
+                            ->addModelTransformer($userTransformer)
                  )
         ;
     }
@@ -38,12 +38,11 @@ class UsersType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-                    'data_class' => 'Covoiturage\UserBundle\Entity\Users',
+            'data_class' => 'Covoiturage\RateCommentBundle\Entity\Comment',
                     'csrf_protection' => false
                 ))
-                ->setRequired(array('geocoding','em'))
+                ->setRequired(array('em'))
                 ->setAllowedTypes(array(
-                    'geocoding' => 'Covoiturage\UserBundle\Services\GoogleGeocoding',
                     'em' => 'Doctrine\Common\Persistence\ObjectManager'
                 ));
     }

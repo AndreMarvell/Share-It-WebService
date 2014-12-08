@@ -20,13 +20,20 @@ class Adresse
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero", type="string", length=255)
+     */
+    private $numero;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255)
+     * @ORM\Column(name="rue", type="string", length=255)
      */
-    private $adresse;
+    private $rue;
     
     /**
      * @var string
@@ -48,6 +55,20 @@ class Adresse
      * @ORM\Column(name="ville", type="string", length=255, nullable=true)
      */
     private $ville;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="region", type="string", length=255)
+     */
+    private $region;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="departement", type="string", length=255)
+     */
+    private $departement;
 
     /**
      * @var string
@@ -55,6 +76,8 @@ class Adresse
      * @ORM\Column(name="pays", type="string", length=255)
      */
     private $pays = "France";
+    
+    
     
     /**
      * @var string
@@ -240,5 +263,97 @@ class Adresse
     public function getLatitude()
     {
         return $this->latitude;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param string $numero
+     * @return Adresse
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return string 
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * Set rue
+     *
+     * @param string $rue
+     * @return Adresse
+     */
+    public function setRue($rue)
+    {
+        $this->rue = $rue;
+
+        return $this;
+    }
+
+    /**
+     * Get rue
+     *
+     * @return string 
+     */
+    public function getRue()
+    {
+        return $this->rue;
+    }
+
+    /**
+     * Set region
+     *
+     * @param string $region
+     * @return Adresse
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return string 
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * Set departement
+     *
+     * @param string $departement
+     * @return Adresse
+     */
+    public function setDepartement($departement)
+    {
+        $this->departement = $departement;
+
+        return $this;
+    }
+
+    /**
+     * Get departement
+     *
+     * @return string 
+     */
+    public function getDepartement()
+    {
+        return $this->departement;
     }
 }

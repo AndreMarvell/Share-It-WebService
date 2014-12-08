@@ -1,3 +1,5 @@
-covoiturage_rate_comment_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: CovoiturageRateCommentBundle:Default:index }
+  
+ratecomment : 
+  type: rest
+  resource:     "CovoiturageRateCommentBundle:RateComment"
+  name_prefix:  api_

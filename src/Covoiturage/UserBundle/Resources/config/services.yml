@@ -1,4 +1,4 @@
 services:
-#    covoiturage_user.example:
-#        class: Covoiturage\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    geocoding:
+        class: Covoiturage\UserBundle\Services\GoogleGeocoding
+        arguments: [%google_api_key%]

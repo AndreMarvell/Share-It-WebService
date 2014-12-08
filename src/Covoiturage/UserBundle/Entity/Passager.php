@@ -33,9 +33,10 @@ class Passager
      */
     private $user;
     
-    /**
+    /** 
      *
      * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\RateThread")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $rate;
     
@@ -45,6 +46,8 @@ class Passager
      * @ORM\JoinColumn(nullable=true)
      */
     private $comments;
+    
+    
 
 
     /**

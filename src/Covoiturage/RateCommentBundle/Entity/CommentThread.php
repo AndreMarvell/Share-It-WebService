@@ -13,12 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class CommentThread
 {
     /**
-     * @var integer
+     * @var string $id
      *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="string")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer

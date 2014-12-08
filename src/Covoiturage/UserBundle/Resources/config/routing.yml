@@ -2,3 +2,15 @@ users :
   type: rest
   resource:     "CovoiturageUserBundle:User"
   name_prefix:  api_
+  
+  
+addresses : 
+  type: rest
+  resource:     "CovoiturageUserBundle:Adresse"
+  name_prefix:  api_
+  
+profil : 
+  type: rest
+  resource:     "CovoiturageUserBundle:Profil"
+  name_prefix:  api_
+

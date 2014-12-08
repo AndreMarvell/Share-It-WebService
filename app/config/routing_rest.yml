@@ -5,4 +5,8 @@ Rest_User :
 Rest_Transaction : 
   type : rest
   resource: "@CovoiturageTransactionBundle/Resources/config/routing.yml"
+  
+Rest_RateComment : 
+  type : rest
+  resource: "@CovoiturageRateCommentBundle/Resources/config/routing.yml"
 

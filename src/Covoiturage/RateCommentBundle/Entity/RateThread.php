@@ -13,12 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class RateThread
 {
     /**
-     * @var integer
+     * @var string $id
      *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="string")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
@@ -123,5 +123,18 @@ class RateThread
             $this->setAverage($new_rate);
         }
             
+    }
+
+    /**
+     * Set id
+     *
+     * @param string $id
+     * @return RateThread
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }

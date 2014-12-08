@@ -4,3 +4,10 @@ Covoiturage\UserBundle\Entity\Users:
             - Email:
                 message: Cet email "{{ value }}" n\'est pas un email valide.
                 checkMX: true
+                
+Covoiturage\UserBundle\Entity\Voiture:
+   properties:
+        annee:
+            - min: 1900
+            - max: 2300
+            - message: Ah vraimennt? Votre voiture date vraiment de "{{ value }}"
