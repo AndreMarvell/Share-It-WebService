@@ -17,10 +17,7 @@ class VoitureType extends AbstractType
         $builder
             ->add('marque')
             ->add('modele')
-            ->add(
-                    $builder->create('annee', 'text')
-                        ->addViewTransformer(new Base())
-                )
+            ->add('annee')
             ->add('image')
             ->add('nb_place')
         ;
