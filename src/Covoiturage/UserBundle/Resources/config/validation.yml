@@ -8,6 +8,9 @@ Covoiturage\UserBundle\Entity\Users:
 Covoiturage\UserBundle\Entity\Voiture:
    properties:
         annee:
-            - min: 1900
-            - max: 2300
-            - message: Ah vraimennt? Votre voiture date vraiment de "{{ value }}"
+            - Range:
+                min: 1980
+                max: 2030
+                minMessage: Ah vraiment? "{{ value }}"? Vous devriez  changer de voiture
+                maxMessage: Ah vraiment? Votre voiture date vraiment de "{{ value }}"
+                
