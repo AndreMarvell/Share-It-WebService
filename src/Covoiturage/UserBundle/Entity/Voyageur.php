@@ -42,15 +42,8 @@ class Voyageur
      * @ORM\Column(name="code_passager", type="string", length=255)
      */
     private $codePassager;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code_conducteur", type="string", length=255)
-     */
-    private $codeConducteur;
     
-        /**
+    /**
      * @var boolean
      *
      * @ORM\Column(name="conducteur_valide", type="boolean")

@@ -59,6 +59,13 @@ class Annonce
      * @ORM\JoinColumn(nullable=false)
      */
     private $conducteur;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="voiture", type="integer")
+     */
+    private $voiture;
 
 
 
@@ -208,5 +215,28 @@ class Annonce
     public function getConducteur()
     {
         return $this->conducteur;
+    }
+
+    /**
+     * Set voiture
+     *
+     * @param integer $voiture
+     * @return Annonce
+     */
+    public function setVoiture($voiture)
+    {
+        $this->voiture = $voiture;
+
+        return $this;
+    }
+
+    /**
+     * Get voiture
+     *
+     * @return integer 
+     */
+    public function getVoiture()
+    {
+        return $this->voiture;
     }
 }

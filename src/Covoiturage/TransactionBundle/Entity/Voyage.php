@@ -35,6 +35,13 @@ class Voyage
      */
     private $voyageurs;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code_conducteur", type="string", length=6)
+     */
+    private $codeConducteur;
+    
     function __construct() {
         $this->voyageurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -108,5 +115,28 @@ class Voyage
     public function getVoyageurs()
     {
         return $this->voyageurs;
+    }
+
+    /**
+     * Set codeConducteur
+     *
+     * @param string $codeConducteur
+     * @return Voyage
+     */
+    public function setCodeConducteur($codeConducteur)
+    {
+        $this->codeConducteur = $codeConducteur;
+
+        return $this;
+    }
+
+    /**
+     * Get codeConducteur
+     *
+     * @return string 
+     */
+    public function getCodeConducteur()
+    {
+        return $this->codeConducteur;
     }
 }
