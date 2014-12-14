@@ -26,6 +26,14 @@ class Users
      * @Expose
      */
     private $id;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pin", type="integer", nullable=true)
+     * 
+     */
+    private $pin;
 
     /**
      * @var string
@@ -47,6 +55,7 @@ class Users
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Expose
      */
     private $email;
 
@@ -558,5 +567,28 @@ class Users
     public function getSalt()
     {
         return $this->salt;
+    }
+
+    /**
+     * Set pin
+     *
+     * @param integer $pin
+     * @return Users
+     */
+    public function setPin($pin)
+    {
+        $this->pin = $pin;
+
+        return $this;
+    }
+
+    /**
+     * Get pin
+     *
+     * @return integer 
+     */
+    public function getPin()
+    {
+        return $this->pin;
     }
 }

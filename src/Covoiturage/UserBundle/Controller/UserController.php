@@ -216,22 +216,32 @@ class UserController extends \FOS\RestBundle\Controller\FOSRestController
      */
     public function putUserAction(Request $request, $id)
     {
+        
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CovoiturageUserBundle:Users')->findOneById($id);
         
         if(!is_object($entity)){
             throw $this->createNotFoundException();
         }else{
-            $geocoding = $this->container->get('geocoding');
-            $form = $this->createForm(new UsersType(), $entity, array("em"=>$em, "geocoding"=>$geocoding));
-            $form->bind($request);
+            $form = $this->createForm(new UsersType(), $entity);
+            //$form->bind($request);
+            $form->bind(array(
+                "nom" => $request->get('nom'),
+                "prenom" => $request->get('prenom'),
+                "email" => $request->get('email'),
+                "adresse" => $request->get('adresse'),
+                "photo" => $request->get('photo'),
+                "facebookId" => $request->get('facebookId'),
+                "pin" => $request->get('pin'))
+            );
+            
 
             if ($form->isValid()) {
 
                 $em->persist($entity);
                 $em->flush();
 
-                return $this->view(null, Codes::HTTP_NO_CONTENT);
+                return $entity;
             }
 
             return array(

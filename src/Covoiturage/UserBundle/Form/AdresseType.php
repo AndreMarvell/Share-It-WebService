@@ -5,10 +5,23 @@ namespace Covoiturage\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Covoiturage\UserBundle\Form\DataTransformer\AdresseTransformer;
+use Covoiturage\UserBundle\Services\GoogleGeocoding;
+use Doctrine\ORM\EntityManager;
 
 
 class AdresseType extends AbstractType
 {
+    
+
+    private $em;
+    private $geocoding;
+
+    function __construct(GoogleGeocoding $geocoding, EntityManager $em) {
+        $this->em = $em;
+        $this->geocoding = $geocoding;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -16,18 +29,9 @@ class AdresseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         
-        $builder
-//            ->add('numero')
-//            ->add('rue')
-            ->add('adresseComplete')
-//            ->add('postal')
-//            ->add('ville')
-//            ->add('region')
-//            ->add('departement')
-//            ->add('pays')
-//            ->add('longitude')
-//            ->add('latitude')
-        ;
+        $adresseTransformer = new AdresseTransformer($this->geocoding,  $this->em);
+     
+        $builder->addModelTransformer($adresseTransformer);
     }
     
     /**
@@ -36,9 +40,8 @@ class AdresseType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-                            'data_class' => 'Covoiturage\UserBundle\Entity\Adresse',
-                            'csrf_protection' => false
-                        ));
+            'invalid_message' => 'The selected adresse does not exist',
+        ));
     }
 
     /**
@@ -46,6 +49,12 @@ class AdresseType extends AbstractType
      */
     public function getName()
     {
-        return '';
+        return 'adresse';
+        
+    }
+    
+    public function getParent()
+    {
+        return 'text';
     }
 }

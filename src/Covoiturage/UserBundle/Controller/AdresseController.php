@@ -38,51 +38,11 @@ class AdresseController extends \FOS\RestBundle\Controller\FOSRestController
 
       $adresse =   $em->getRepository('CovoiturageUserBundle:Adresse')->findOneById($id);
 
-      if(!is_object($user)){
+      if(!is_object($adresse)){
         throw $this->createNotFoundException();
       }
       return $adresse;
     }
     
-    
-    /**
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Creation d'une adresse à partir d'une adresse en texte",
-     *  input="Covoiturage\UserBundle\Form\AdresseType",
-     *  output="Covoiturage\UserBundle\Entity\Adresse",
-     * )
-     * )
-     */
-    public function postAdresseAction(Request $request)
-    {
-        $geocoding = $this->container->get('geocoding');
-        
-        $entity = new Adresse();
-
-        $form = $this->createForm(new AdresseType(), $entity);
-        $form->bind($request);
-        
-        
-        $entity = $geocoding->geoCodeAddress($form->get('adresseComplete')->getData());
-        
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-            return $entity;
-//            return $this->redirectView(
-//                $this->generateUrl(
-//                    'api_get_user',
-//                    array('id' => $entity->getId())
-//                    ),
-//                Codes::HTTP_FOUND
-//                );
-        }
-        return array(
-            'form' => $form,
-        );
-    }
 
 }
