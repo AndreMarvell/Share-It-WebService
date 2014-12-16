@@ -56,14 +56,14 @@ class Conducteur
     
     /** 
      *
-     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\RateThread")
+     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\RateThread", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $rate;
     
     /**
      *
-     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\CommentThread")
+     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\CommentThread", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $comments;
