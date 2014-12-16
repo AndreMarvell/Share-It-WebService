@@ -68,7 +68,7 @@ class Demande
      */
     private $arrivee_propose;
     
-    function __construct($user) {
+    function __construct() {
         $this->date = new \DateTime();
         
     }
