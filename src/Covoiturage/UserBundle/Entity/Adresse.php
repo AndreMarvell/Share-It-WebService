@@ -24,14 +24,14 @@ class Adresse
     /**
      * @var string
      *
-     * @ORM\Column(name="numero", type="string", length=255)
+     * @ORM\Column(name="numero", type="string", length=255, nullable=true)
      */
     private $numero;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rue", type="string", length=255)
+     * @ORM\Column(name="rue", type="string", length=255, length=255, nullable=true)
      */
     private $rue;
     
@@ -45,28 +45,28 @@ class Adresse
     /**
      * @var integer
      *
-     * @ORM\Column(name="postal", type="integer", nullable=true)
+     * @ORM\Column(name="postal", type="integer", nullable=true, length=255, nullable=true)
      */
     private $postal;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true, length=255, nullable=true)
      */
     private $ville;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="region", type="string", length=255)
+     * @ORM\Column(name="region", type="string", length=255, length=255, nullable=true)
      */
     private $region;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="departement", type="string", length=255)
+     * @ORM\Column(name="departement", type="string", length=255, length=255, nullable=true)
      */
     private $departement;
 
