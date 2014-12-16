@@ -50,8 +50,18 @@ class Passager
     
     function __construct($user) {
         $this->user = $user;
-        $this->comments = new \Covoiturage\RateCommentBundle\Entity\CommentThread();
-        $this->rate = new \Covoiturage\RateCommentBundle\Entity\RateThread();
+    }
+    
+    /**
+     * Creer les entités comment thread
+     *
+     * @return void 
+     */
+    public function createThread()
+    {
+        
+        $this->comments = new \Covoiturage\RateCommentBundle\Entity\CommentThread("passager".$this->id);
+        $this->rate = new \Covoiturage\RateCommentBundle\Entity\RateThread("passager".$this->id);
     }
 
         

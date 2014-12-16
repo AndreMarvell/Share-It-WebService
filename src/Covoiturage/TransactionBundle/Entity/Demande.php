@@ -57,7 +57,7 @@ class Demande
     
     /**
      *
-     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\CommentThread")
+     * @ORM\OneToOne(targetEntity="Covoiturage\RateCommentBundle\Entity\CommentThread", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $comments;
@@ -70,8 +70,19 @@ class Demande
     
     function __construct($user) {
         $this->date = new \DateTime();
-        $this->comments = new \Covoiturage\RateCommentBundle\Entity\CommentThread();
+        
     }
+    
+    /**
+     * Creer les entités comment thread
+     *
+     * @return void 
+     */
+    public function createThread()
+    {
+        $this->comments = new \Covoiturage\RateCommentBundle\Entity\CommentThread("demande".$this->id);
+    }
+    
 
 
     /**

@@ -74,8 +74,17 @@ class Conducteur
     function __construct($user) {
         $this->user = $user;
         $this->voitures = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new \Covoiturage\RateCommentBundle\Entity\CommentThread();
-        $this->rate = new \Covoiturage\RateCommentBundle\Entity\RateThread();
+    }
+    
+    /**
+     * Creer les entités comment thread
+     *
+     * @return void 
+     */
+    public function createThread()
+    {
+        $this->comments = new \Covoiturage\RateCommentBundle\Entity\CommentThread("conducteur".$this->id);
+        $this->rate = new \Covoiturage\RateCommentBundle\Entity\RateThread("conducteur".$this->id);
     }
     
     /**
