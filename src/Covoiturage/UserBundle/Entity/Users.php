@@ -60,7 +60,7 @@ class Users
     private $email;
 
     /**
-     * @ORM\OneToOne(targetEntity="Covoiturage\UserBundle\Entity\Adresse", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Covoiturage\UserBundle\Entity\Adresse", cascade={"persist"})
      * @ORM\JoinColumn(name="adresse_id", referencedColumnName="id", nullable=true)
      * @Expose
      */
