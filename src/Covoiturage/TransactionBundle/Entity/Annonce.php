@@ -66,7 +66,13 @@ class Annonce
      * @ORM\Column(name="voiture", type="integer")
      */
     private $voiture;
-
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="archivee", type="boolean")
+     */
+    private $archivee = false;
 
 
     /**
@@ -238,5 +244,28 @@ class Annonce
     public function getVoiture()
     {
         return $this->voiture;
+    }
+
+    /**
+     * Set archivee
+     *
+     * @param boolean $archivee
+     * @return Annonce
+     */
+    public function setArchivee($archivee)
+    {
+        $this->archivee = $archivee;
+
+        return $this;
+    }
+
+    /**
+     * Get archivee
+     *
+     * @return boolean 
+     */
+    public function getArchivee()
+    {
+        return $this->archivee;
     }
 }

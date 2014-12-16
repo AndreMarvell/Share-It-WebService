@@ -44,7 +44,7 @@ class Demande
     
         
     /**
-     * @ORM\OneToOne(targetEntity="Covoiturage\TransactionBundle\Entity\Annonce", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Covoiturage\TransactionBundle\Entity\Annonce", cascade={"persist"})
      */
     private $annonce;
     
@@ -67,6 +67,14 @@ class Demande
      * @ORM\JoinColumn(name="arrivee_id", referencedColumnName="id", nullable=true)
      */
     private $arrivee_propose;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="archivee", type="boolean")
+     */
+    private $archivee = false;
+    
     
     function __construct() {
         $this->date = new \DateTime();
@@ -254,5 +262,28 @@ class Demande
     public function getArriveePropose()
     {
         return $this->arrivee_propose;
+    }
+
+    /**
+     * Set archivee
+     *
+     * @param boolean $archivee
+     * @return Demande
+     */
+    public function setArchivee($archivee)
+    {
+        $this->archivee = $archivee;
+
+        return $this;
+    }
+
+    /**
+     * Get archivee
+     *
+     * @return boolean 
+     */
+    public function getArchivee()
+    {
+        return $this->archivee;
     }
 }

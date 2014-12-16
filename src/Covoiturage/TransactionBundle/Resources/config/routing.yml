@@ -8,3 +8,9 @@ annonces :
   type: rest
   resource:     "CovoiturageTransactionBundle:Annonces"
   name_prefix:  api_
+  
+  
+demandes : 
+  type: rest
+  resource:     "CovoiturageTransactionBundle:Demandes"
+  name_prefix:  api_
