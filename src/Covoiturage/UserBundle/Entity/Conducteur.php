@@ -69,9 +69,13 @@ class Conducteur
     private $comments;
     
     
+  
     
-    function __construct() {
+    function __construct($user) {
+        $this->user = $user;
         $this->voitures = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Covoiturage\RateCommentBundle\Entity\CommentThread();
+        $this->rate = new \Covoiturage\RateCommentBundle\Entity\RateThread();
     }
     
     /**

@@ -67,6 +67,11 @@ class Demande
      * @ORM\JoinColumn(name="arrivee_id", referencedColumnName="id", nullable=true)
      */
     private $arrivee_propose;
+    
+    function __construct($user) {
+        $this->date = new \DateTime();
+        $this->comments = new \Covoiturage\RateCommentBundle\Entity\CommentThread();
+    }
 
 
     /**
