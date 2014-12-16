@@ -28,8 +28,11 @@ class CommentThread
     private $numComment = 0;
 
 
+    function __construct($id) {
+        $this->id = $id;
+    }
 
-    /**
+        /**
      * Get id
      *
      * @return integer 

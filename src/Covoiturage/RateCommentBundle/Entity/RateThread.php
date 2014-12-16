@@ -33,8 +33,12 @@ class RateThread
      * @ORM\Column(name="average", type="float")
      */
     private $average = 0;
+    
+    function __construct($id) {
+        $this->id = $id;
+    }
 
-
+    
     /**
      * Get id
      *
