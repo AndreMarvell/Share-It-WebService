@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AnnonceType extends AbstractType
+class VoyageType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,8 @@ class AnnonceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('recurrent')
-            ->add('prix')
-            ->add('depart', 'adresse')
-            ->add('arrivee', 'adresse')
-            ->add('voiture')
-            ->add('nbPlacesDisponibles')
+            ->add('demande')
+            ->add('prixFinal')
         ;
     }
     
@@ -30,7 +26,7 @@ class AnnonceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Covoiturage\TransactionBundle\Entity\Annonce',
+            'data_class' => 'Covoiturage\TransactionBundle\Entity\Voyage',
             'csrf_protection' => false
         ));
     }

@@ -73,7 +73,13 @@ class Annonce
      * @ORM\Column(name="archivee", type="boolean")
      */
     private $archivee = false;
-
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbPlacesDisponibles", type="integer")
+     */
+    private $nbPlacesDisponibles;
 
     /**
      * Get id
@@ -267,5 +273,28 @@ class Annonce
     public function getArchivee()
     {
         return $this->archivee;
+    }
+
+    /**
+     * Set nbPlacesDisponibles
+     *
+     * @param integer $nbPlacesDisponibles
+     * @return Annonce
+     */
+    public function setNbPlacesDisponibles($nbPlacesDisponibles)
+    {
+        $this->nbPlacesDisponibles = $nbPlacesDisponibles;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPlacesDisponibles
+     *
+     * @return integer 
+     */
+    public function getNbPlacesDisponibles()
+    {
+        return $this->nbPlacesDisponibles;
     }
 }
